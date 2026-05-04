@@ -21,6 +21,7 @@ header { padding: 3rem 2rem 1.5rem; max-width: 1100px; margin: 0 auto; }
 .brand { font-family: "DM Serif Display", serif; font-size: clamp(2rem, 5vw, 3.5rem); line-height: 1; letter-spacing: -0.02em; }
 .brand em { font-style: italic; color: var(--accent); }
 .header-meta { font-size: 0.72rem; font-weight: 300; color: var(--muted); letter-spacing: 0.08em; text-transform: uppercase; }
+.tag-brand { background: #EDE8FB; color: #4A2FA0; font-size: 0.68rem; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; padding: 4px 12px; border-radius: 100px; }
 .header-desc { font-size: 0.875rem; color: var(--muted); font-weight: 300; line-height: 1.6; }
 
 .filters { max-width: 1100px; margin: 0 auto; padding: 1.25rem 2rem; display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
@@ -40,6 +41,8 @@ header { padding: 3rem 2rem 1.5rem; max-width: 1100px; margin: 0 auto; }
 .card-thumb-inner { width: 100%; height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px; }
 .thumb-mascara { background: linear-gradient(160deg, #3d1f2a 0%, #1A1410 100%); }
 .thumb-serum { background: linear-gradient(160deg, #1f2a3d 0%, #111a1a 100%); }
+.thumb-img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.thumb-fallback { width: 100%; height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px; }
 .thumb-num { font-family: "DM Serif Display", serif; font-size: 5rem; line-height: 1; color: rgba(255,255,255,0.08); }
 .thumb-label { font-size: 0.62rem; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(255,255,255,0.28); text-align: center; padding: 0 1rem; }
 .thumb-overlay { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; background: rgba(26,20,16,0.4); opacity: 0; transition: opacity 0.2s; }
@@ -102,16 +105,16 @@ header { padding: 3rem 2rem 1.5rem; max-width: 1100px; margin: 0 auto; }
 <header>
   <div class="header-top">
     <h1 class="brand">banco de <em>refs</em></h1>
-    <span class="header-meta">Le Moritz &middot; TikTok Shop</span>
+    <span class="header-meta tag-brand">Le Moritz &middot; TikTok Shop</span>
   </div>
-  <p class="header-desc">Referencias de video com roteiros prontos para adaptar. Clique em qualquer card para ver o roteiro.</p>
+  <p class="header-desc">Referências de vídeos com roteiros prontos para adaptar.<br>Clique em qualquer card para ver o vídeo referência e copiar o roteiro já adaptado para os nossos produtos! :)</p>
 </header>
 
 <div class="filters">
   <span class="filter-label">filtrar</span>
   <button class="filter-btn active" id="btn-all" onclick="filterRefs('all')">Todos</button>
-  <button class="filter-btn" id="btn-mascara" onclick="filterRefs('mascara')">Mascara de cilios</button>
-  <button class="filter-btn" id="btn-serum" onclick="filterRefs('serum')">Serum redutor</button>
+  <button class="filter-btn" id="btn-mascara" onclick="filterRefs('mascara')">Máscara de cílios</button>
+  <button class="filter-btn" id="btn-serum" onclick="filterRefs('serum')">Sérum redutor</button>
 </div>
 
 <hr class="divider">
@@ -135,66 +138,66 @@ var REFS = [
   {
     id: 1,
     product: "mascara",
-    productLabel: "Mascara de cilios",
+    productLabel: "Máscara de cílios",
     format: "Depoimento pessoal",
-    title: "Cilios sumindo com o tempo",
-    sub: "Identifica quem tem cilios ralos e apresenta a solucao de forma natural.",
+    title: "Tem cílios ralos, que eu sei",
+    sub: "Identifica quem tem cílios ralos e apresenta a solução de forma natural.",
     driveId: "1qroiLSEtiiNjY1XoMRhFxR-Me4Bwjftg",
-    script: "Voce tem cilios ralos e ainda usa qualquer mascara de cilios por ai, eu sei.\n\nVem ca, deixa eu te mostrar uma coisa.\n\nDepois de alguns anos eu fui sentindo que meus cilios tavam desaparecendo. Ficando cada vez mais fracos, mais ralos, mais curtos. E nenhuma mascara resolvia, so escondia por cima.\n\nAte eu encontrar a Mascara de Cilios Regenerativa da Le Moritz. E gente... eu nao tenho palavras.\n\nEla nao e so mascara. Ela trata enquanto voce usa. Fortalece, alonga e cuida dos seus cilios por dentro. Do jeito que eles merecem.\n\nVou deixar o link aqui pra voces - e so clicar na sacolinha. O custo-beneficio disso e de outro mundo.\n\nE eu nao sei como eu nao tinha testado antes.\nVai la que depois voce vai me agradecer.",
+    script: "Você tem cílios ralos e ainda usa qualquer máscara de cílios por aí, eu sei.\n\nVem cá, deixa eu te mostrar uma coisa.\n\nDepois de alguns anos eu fui sentindo que meus cílios tavam desaparecendo. Ficando cada vez mais fracos, mais ralos, mais curtos. E nenhuma máscara resolvia, só escondia por cima.\n\nAté eu encontrar a Máscara de Cílios Regenerativa da Le Moritz. E gente... eu não tenho palavras.\n\nEla não é só máscara. Ela trata enquanto você usa. Fortalece, alonga e cuida dos seus cílios por dentro. Do jeito que eles merecem.\n\nVou deixar o link aqui pra vocês - é só clicar na sacolinha. O custo-benefício disso é de outro mundo.\n\nE eu não sei como eu não tinha testado antes.\nVai lá que depois você vai me agradecer.",
     tips: [
-      "Fale quando voce comecou a notar a diferenca - primeira semana, primeiro mes.",
-      "Mostre o produto na mao antes de aplicar. Proximidade com a camera ajuda na conversao.",
-      "A frase so escondia por cima e forte - mantenha ou troque por algo da sua experiencia real."
+      "Fale quando você começou a notar a diferença - primeira semana, primeiro mês.",
+      "Mostre o produto na mão antes de aplicar. Proximidade com a câmera ajuda na conversão.",
+      "A frase só escondia por cima é forte - mantenha ou troque por algo da sua experiência real."
     ]
   },
   {
     id: 2,
     product: "mascara",
-    productLabel: "Mascara de cilios",
+    productLabel: "Máscara de cílios",
     format: "Antes e depois",
-    title: "Diferenca gritante",
-    sub: "Comparacao visual direta. A prova acontece na tela, antes de qualquer argumento.",
+    title: "Diferença gritante",
+    sub: "Comparação visual direta. A prova acontece na tela, antes de qualquer argumento.",
     driveId: "1qQupHfhq9CYcUzplAE-bnk9S-Ak8aV-A",
-    script: "Com a Mascara Regenerativa da Le Moritz //// Sem a Mascara Regenerativa da Le Moritz.\n\nGente, olha essa diferenca gritante. Eu tenho cilios ralos, que foram sumindo com o tempo, entao eu demorei, mas finalmente encontrei uma mascara que deixasse meus cilios assim.\n\nE essa, alem de dar volume, ela regenera enquanto voce usa. Fortalece o cilio mesmo, e tratamento e maquiagem ao mesmo tempo. E o aplicador e pensado pra pegar ate nos cilios mais curtos e escondidos, o que da esse efeito bonita-de-verdade que nao some no fim do dia.\n\nPerfeita. To encantada.\n\nSe voce tambem ta precisando de uma mascara assim, clica aqui no carrinho laranja e faz seu pedido.",
+    script: "Com a Máscara Regenerativa da Le Moritz //// Sem a Máscara Regenerativa da Le Moritz.\n\nGente, olha essa diferença gritante. Eu tenho cílios ralos, que foram sumindo com o tempo, então eu demorei, mas finalmente encontrei uma máscara que deixasse meus cílios assim.\n\nE essa, além de dar volume, ela regenera enquanto você usa. Fortalece o cílio mesmo, é tratamento e maquiagem ao mesmo tempo. E o aplicador é pensado pra pegar até nos cílios mais curtos e escondidos, o que dá esse efeito bonita-de-verdade que não some no fim do dia.\n\nPerfeita. Tô encantada.\n\nSe você também tá precisando de uma máscara assim, clica aqui no carrinho laranja e faz seu pedido.",
     tips: [
-      "O //// e uma divisoria visual - coloque o texto na tela dividindo o antes/depois no corte do video.",
-      "Grave o olho bem de perto, com boa luz, nos dois momentos. A prova visual e o que converte.",
-      "Bonita-de-verdade e um gancho emocional forte - explore com sua propria linguagem se preferir."
+      "O //// é uma divisória visual - coloque o texto na tela dividindo o antes/depois no corte do vídeo.",
+      "Grave o olho bem de perto, com boa luz, nos dois momentos. A prova visual é o que converte.",
+      "Bonita-de-verdade é um gancho emocional forte - explore com sua própria linguagem se preferir."
     ]
   },
   {
     id: 3,
     product: "serum",
-    productLabel: "Serum redutor",
-    format: "Demonstracao ao vivo",
-    title: "3 minutos em tempo real",
-    sub: "A espera cria tensao e mantem o espectador ate o fim para ver o resultado.",
+    productLabel: "Sérum redutor",
+    format: "Antes e depois",
+    title: "Com e sem sérum",
+    sub: "Comparação visual direta. Espanto positivo com o resultado.",
     driveId: "1zMMbwBC5LtEy5b4nCzyynkjQpk-45rcc",
-    script: "Prontas? Literalmente 10 anos mais jovem.\n\nEu tenho [SUA IDADE] anos e nunca vi um produto que funcionasse assim antes. Esse e o Serum Redutor Instantaneo de Linhas Le Moritz. Absolutamente insano.\n\nEu coloquei nas linhas da olheira e na parte de cima da palpebra. E olha - eu vou provar pra voces agora. Espera comigo que leva 3 minutinhos.\n\nVoces ja podem ver a diferenca. E realmente louco. Eu preciso de um estoque desse.\n\nE o melhor: ta disponivel agora, e so clicar no carrinho laranja. Eu pegaria enquanto da, porque nao vai durar. A prova ta ai, isso daqui e chocante.",
+    script: "Prontas? Literalmente 10 anos mais jovem.\n\nEu tenho [SUA IDADE] anos e nunca vi um produto que funcionasse assim antes. Esse é o Sérum Redutor Instantâneo de Linhas Le Moritz. Absolutamente insano.\n\nEu coloquei nas linhas da olheira e na parte de cima da pálpebra. E olha - eu vou provar pra vocês agora. Espera comigo que leva 3 minutinhos.\n\nVocês já podem ver a diferença. É realmente louco. Eu preciso de um estoque desse.\n\nE o melhor: tá disponível agora, é só clicar no carrinho laranja. Eu pegaria enquanto dá, porque não vai durar. A prova tá aí, isso daqui é chocante.",
     tips: [
-      "Substitua [SUA IDADE] pela sua idade real - a especificidade cria identificacao.",
-      "Grave em tempo real mesmo, mostrando o relogio ou contando em voz alta. O processo visivel e o diferencial desta ref.",
-      "Boa iluminacao lateral nao frontal destaca mais as linhas antes e depois da aplicacao."
+      "Substitua [SUA IDADE] pela sua idade real - a especificidade cria identificação.",
+      "Grave em tempo real mesmo, mostrando o relógio ou contando em voz alta. O processo visível é o diferencial desta ref.",
+      "Boa iluminação lateral não frontal destaca mais as linhas antes e depois da aplicação."
     ]
   },
   {
     id: 4,
     product: "serum",
-    productLabel: "Serum redutor",
+    productLabel: "Sérum redutor",
     format: "Gancho de texto",
     title: "A mulher de 60 anos",
     sub: "Curiosidade mais contraste de idade. Para o scroll antes de qualquer palavra ser dita.",
     driveId: "1ZY7SsoZQ8QbMQIr_ubgKAXitGJW_QF3Q",
     isOptions: true,
     options: [
-      { label: "Opcao A - com idade propria mais narrativa", text: "Eu tenho [IDADE] anos e fui descobrir isso por causa de uma mulher de 60 que parecia ter 40. Perguntei o segredo dela e ela me mostrou isso." },
-      { label: "Opcao B - tom bem-humorado", text: "Nao me envergonho de dizer: eu copiei a skincare de uma senhora de 60 anos porque ela tava ARRASANDO." },
-      { label: "Opcao C - direto ao ponto", text: "Uma mulher de 60 anos me ensinou a nao precisar de procedimentos." }
+      { label: "Opção A - com idade própria mais narrativa", text: "Eu tenho [IDADE] anos e fui descobrir isso por causa de uma mulher de 60 que parecia ter 40. Perguntei o segredo dela e ela me mostrou isso." },
+      { label: "Opção B - tom bem-humorado", text: "Não me envergonho de dizer: eu copiei a skincare de uma senhora de 60 anos porque ela tava ARRASANDO." },
+      { label: "Opção C - direto ao ponto", text: "Uma mulher de 60 anos me ensinou a não precisar de procedimentos." }
     ],
     tips: [
-      "Esses ganchos funcionam como texto sobreposto no inicio - combine com o roteiro da Ref 3.",
-      "A opcao C para o scroll mais rapido. A opcao A funciona melhor em videos mais longos.",
-      "Se voce tiver uma historia real parecida, adapte com seus detalhes - fica muito mais autentico."
+      "Esses ganchos funcionam como texto sobreposto no início - combine com o roteiro da Ref 3.",
+      "A opção C para o scroll mais rápido. A opção A funciona melhor em vídeos mais longos.",
+      "Se você tiver uma história real parecida, adapte com seus detalhes - fica muito mais autêntico."
     ]
   }
 ];
@@ -205,18 +208,22 @@ function driveUrl(id) {
   return "https://drive.google.com/file/d/" + id + "/view";
 }
 
+function thumbUrl(id) {
+  return "https://drive.google.com/thumbnail?id=" + id + "&sz=w400";
+}
+
 function renderCards() {
   var grid = document.getElementById("grid");
   var list = currentFilter === "all" ? REFS : REFS.filter(function(r) { return r.product === currentFilter; });
   var html = "";
   for (var i = 0; i < list.length; i++) {
     var r = list[i];
-    var thumbClass = r.product === "mascara" ? "thumb-mascara" : "thumb-serum";
+    var fallbackClass = r.product === "mascara" ? "thumb-mascara" : "thumb-serum";
     var tagClass = r.product === "mascara" ? "tag-mascara" : "tag-serum";
     html += "<div class=\"card\" onclick=\"openModal(" + r.id + ")\">";
-    html += "<div class=\"card-thumb\"><div class=\"card-thumb-inner " + thumbClass + "\">";
-    html += "<span class=\"thumb-num\">" + r.id + "</span>";
-    html += "<span class=\"thumb-label\">" + r.productLabel + "</span>";
+    html += "<div class=\"card-thumb\">";
+    html += "<div class=\"card-thumb-inner " + fallbackClass + "\" id=\"thumb-wrap-" + r.id + "\">";
+    html += "<img class=\"thumb-img\" src=\"" + thumbUrl(r.driveId) + "\" alt=\"Ref " + r.id + "\" onerror=\"this.style.display='none'\">";
     html += "</div>";
     html += "<div class=\"thumb-overlay\"><div class=\"play-btn\"><svg width=\"14\" height=\"14\" viewBox=\"0 0 14 14\" fill=\"none\"><path d=\"M3 2l9 5-9 5V2z\" fill=\"#1A1410\"/></svg></div></div>";
     html += "</div>";
