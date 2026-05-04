@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Banco de Refs - Le Moritz</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --cream: #F7F3EE;
+  --ink: #1A1410;
+  --muted: #8A7F76;
+  --accent: #7B4FD4;
+  --border: rgba(26,20,16,0.1);
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: "DM Sans", sans-serif; background: var(--cream); color: var(--ink); min-height: 100vh; }
+
+header { padding: 3rem 2rem 1.5rem; max-width: 1100px; margin: 0 auto; }
+.header-top { display: flex; align-items: baseline; justify-content: space-between; flex-wrap: wrap; gap: 1rem; margin-bottom: 0.75rem; }
+.brand { font-family: "DM Serif Display", serif; font-size: clamp(2rem, 5vw, 3.5rem); line-height: 1; letter-spacing: -0.02em; }
+.brand em { font-style: italic; color: var(--accent); }
+.header-meta { font-size: 0.72rem; font-weight: 300; color: var(--muted); letter-spacing: 0.08em; text-transform: uppercase; }
+.header-desc { font-size: 0.875rem; color: var(--muted); font-weight: 300; line-height: 1.6; }
+
+.filters { max-width: 1100px; margin: 0 auto; padding: 1.25rem 2rem; display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
+.filter-label { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--muted); margin-right: 4px; }
+.filter-btn { padding: 6px 16px; border-radius: 100px; border: 1px solid var(--border); background: transparent; font-family: "DM Sans", sans-serif; font-size: 0.8rem; color: var(--muted); cursor: pointer; transition: all 0.2s; }
+.filter-btn:hover { border-color: var(--ink); color: var(--ink); }
+.filter-btn.active { background: var(--ink); border-color: var(--ink); color: var(--cream); }
+
+.divider { max-width: 1100px; margin: 0 auto 2rem; padding: 0 2rem; border: none; border-top: 1px solid var(--border); }
+
+.grid { max-width: 1100px; margin: 0 auto; padding: 0 2rem 4rem; display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 1.25rem; }
+
+.card { background: #fff; border-radius: 16px; overflow: hidden; border: 1px solid var(--border); cursor: pointer; transition: transform 0.25s, box-shadow 0.25s; display: flex; flex-direction: column; }
+.card:hover { transform: translateY(-4px); box-shadow: 0 12px 40px rgba(26,20,16,0.1); }
+
+.card-thumb { position: relative; aspect-ratio: 9/14; overflow: hidden; }
+.card-thumb-inner { width: 100%; height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px; }
+.thumb-mascara { background: linear-gradient(160deg, #3d1f2a 0%, #1A1410 100%); }
+.thumb-serum { background: linear-gradient(160deg, #1f2a3d 0%, #111a1a 100%); }
+.thumb-num { font-family: "DM Serif Display", serif; font-size: 5rem; line-height: 1; color: rgba(255,255,255,0.08); }
+.thumb-label { font-size: 0.62rem; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(255,255,255,0.28); text-align: center; padding: 0 1rem; }
+.thumb-overlay { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; background: rgba(26,20,16,0.4); opacity: 0; transition: opacity 0.2s; }
+.card:hover .thumb-overlay { opacity: 1; }
+.play-btn { width: 48px; height: 48px; border-radius: 50%; background: white; display: flex; align-items: center; justify-content: center; }
+
+.card-body { padding: 1.1rem 1.25rem 1.25rem; display: flex; flex-direction: column; gap: 8px; flex: 1; }
+.card-tags { display: flex; gap: 6px; flex-wrap: wrap; }
+.tag { font-size: 0.62rem; font-weight: 500; letter-spacing: 0.06em; text-transform: uppercase; padding: 3px 10px; border-radius: 100px; }
+.tag-mascara { background: #FDE8E0; color: #9B3E2A; }
+.tag-serum { background: #DCF0EA; color: #1E6657; }
+.tag-format { background: var(--cream); color: var(--muted); }
+.card-title { font-family: "DM Serif Display", serif; font-size: 1.05rem; line-height: 1.25; color: var(--ink); }
+.card-sub { font-size: 0.76rem; color: var(--muted); font-weight: 300; line-height: 1.5; }
+.card-footer { margin-top: auto; padding-top: 10px; display: flex; align-items: center; justify-content: space-between; }
+.ref-num { font-size: 0.68rem; color: var(--muted); font-weight: 300; letter-spacing: 0.05em; }
+.arrow-btn { width: 30px; height: 30px; border-radius: 50%; border: 1px solid var(--border); background: transparent; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: all 0.2s; }
+.arrow-btn:hover { background: var(--ink); }
+
+.backdrop { display: none; position: fixed; inset: 0; background: rgba(26,20,16,0.65); z-index: 100; align-items: center; justify-content: center; padding: 1rem; }
+.backdrop.open { display: flex; }
+.modal { background: white; border-radius: 20px; width: 100%; max-width: 880px; max-height: 90vh; display: grid; grid-template-columns: 1fr 1fr; position: relative; overflow: hidden; }
+.modal-left { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 1.25rem; padding: 2.5rem 2rem; position: relative; min-height: 420px; }
+.modal-left-mascara { background: linear-gradient(160deg, #3d1f2a 0%, #1A1410 100%); }
+.modal-left-serum { background: linear-gradient(160deg, #1f2a3d 0%, #111a1a 100%); }
+.modal-big-num { font-family: "DM Serif Display", serif; font-size: 7rem; color: rgba(255,255,255,0.05); position: absolute; bottom: 1rem; right: 1.5rem; line-height: 1; }
+.modal-fmt { font-size: 0.62rem; letter-spacing: 0.15em; text-transform: uppercase; color: rgba(255,255,255,0.38); }
+.modal-vid-title { font-family: "DM Serif Display", serif; font-size: 1.3rem; color: rgba(255,255,255,0.82); text-align: center; line-height: 1.3; }
+.watch-btn { display: inline-flex; align-items: center; gap: 9px; padding: 11px 22px; border-radius: 100px; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); color: white; font-family: "DM Sans", sans-serif; font-size: 0.82rem; text-decoration: none; transition: all 0.2s; }
+.watch-btn:hover { background: rgba(255,255,255,0.2); }
+
+.modal-right { padding: 2rem; display: flex; flex-direction: column; gap: 1.1rem; overflow-y: auto; max-height: 90vh; }
+.modal-close { position: absolute; top: 1rem; right: 1rem; width: 34px; height: 34px; border-radius: 50%; background: rgba(255,255,255,0.15); border: none; cursor: pointer; display: flex; align-items: center; justify-content: center; z-index: 10; transition: background 0.2s; }
+.modal-close:hover { background: rgba(255,255,255,0.28); }
+.modal-tags { display: flex; gap: 6px; flex-wrap: wrap; }
+.modal-title { font-family: "DM Serif Display", serif; font-size: 1.4rem; line-height: 1.2; color: var(--ink); }
+.section-label { font-size: 0.62rem; font-weight: 500; text-transform: uppercase; letter-spacing: 0.1em; color: var(--muted); margin-bottom: 8px; }
+.script-box { background: var(--cream); border-radius: 10px; padding: 1rem; font-size: 0.8rem; line-height: 1.8; color: var(--ink); white-space: pre-wrap; font-weight: 300; }
+.option-block { background: var(--cream); border-radius: 10px; padding: 11px 14px; margin-bottom: 8px; }
+.option-lbl { font-size: 0.62rem; font-weight: 500; text-transform: uppercase; letter-spacing: 0.08em; color: #1E6657; margin-bottom: 5px; }
+.option-txt { font-size: 0.8rem; line-height: 1.7; color: var(--ink); font-weight: 300; }
+.tips { display: flex; flex-direction: column; gap: 8px; }
+.tip { font-size: 0.76rem; color: var(--muted); line-height: 1.55; display: flex; gap: 8px; font-weight: 300; }
+.tip-dot { width: 4px; height: 4px; border-radius: 50%; flex-shrink: 0; margin-top: 7px; }
+.dot-mascara { background: #C4705A; }
+.dot-serum { background: #3A7068; }
+.copy-btn { display: inline-flex; align-items: center; gap: 8px; padding: 9px 18px; border-radius: 10px; border: 1px solid var(--border); background: transparent; font-family: "DM Sans", sans-serif; font-size: 0.78rem; color: var(--ink); cursor: pointer; transition: all 0.2s; align-self: flex-start; margin-top: auto; }
+.copy-btn:hover { background: var(--ink); color: white; }
+.copy-btn.done { background: #3A7068; color: white; border-color: #3A7068; }
+
+@media (max-width: 640px) {
+  .modal { grid-template-columns: 1fr; }
+  .modal-left { min-height: 200px; padding: 1.5rem; }
+  .modal-right { max-height: 60vh; }
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-top">
+    <h1 class="brand">banco de <em>refs</em></h1>
+    <span class="header-meta">Le Moritz &middot; TikTok Shop</span>
+  </div>
+  <p class="header-desc">Referencias de video com roteiros prontos para adaptar. Clique em qualquer card para ver o roteiro.</p>
+</header>
+
+<div class="filters">
+  <span class="filter-label">filtrar</span>
+  <button class="filter-btn active" id="btn-all" onclick="filterRefs('all')">Todos</button>
+  <button class="filter-btn" id="btn-mascara" onclick="filterRefs('mascara')">Mascara de cilios</button>
+  <button class="filter-btn" id="btn-serum" onclick="filterRefs('serum')">Serum redutor</button>
+</div>
+
+<hr class="divider">
+
+<div class="grid" id="grid"></div>
+
+<div class="backdrop" id="backdrop" onclick="closeOutside(event)">
+  <div class="modal" id="modal">
+    <button class="modal-close" onclick="closeModal()">
+      <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
+        <path d="M1 1l10 10M11 1L1 11" stroke="white" stroke-width="1.5" stroke-linecap="round"/>
+      </svg>
+    </button>
+    <div id="modal-left" class="modal-left"></div>
+    <div id="modal-right" class="modal-right"></div>
+  </div>
+</div>
+
+<script>
+var REFS = [
+  {
+    id: 1,
+    product: "mascara",
+    productLabel: "Mascara de cilios",
+    format: "Depoimento pessoal",
+    title: "Cilios sumindo com o tempo",
+    sub: "Identifica quem tem cilios ralos e apresenta a solucao de forma natural.",
+    driveId: "1qroiLSEtiiNjY1XoMRhFxR-Me4Bwjftg",
+    script: "Voce tem cilios ralos e ainda usa qualquer mascara de cilios por ai, eu sei.\n\nVem ca, deixa eu te mostrar uma coisa.\n\nDepois de alguns anos eu fui sentindo que meus cilios tavam desaparecendo. Ficando cada vez mais fracos, mais ralos, mais curtos. E nenhuma mascara resolvia, so escondia por cima.\n\nAte eu encontrar a Mascara de Cilios Regenerativa da Le Moritz. E gente... eu nao tenho palavras.\n\nEla nao e so mascara. Ela trata enquanto voce usa. Fortalece, alonga e cuida dos seus cilios por dentro. Do jeito que eles merecem.\n\nVou deixar o link aqui pra voces - e so clicar na sacolinha. O custo-beneficio disso e de outro mundo.\n\nE eu nao sei como eu nao tinha testado antes.\nVai la que depois voce vai me agradecer.",
+    tips: [
+      "Fale quando voce comecou a notar a diferenca - primeira semana, primeiro mes.",
+      "Mostre o produto na mao antes de aplicar. Proximidade com a camera ajuda na conversao.",
+      "A frase so escondia por cima e forte - mantenha ou troque por algo da sua experiencia real."
+    ]
+  },
+  {
+    id: 2,
+    product: "mascara",
+    productLabel: "Mascara de cilios",
+    format: "Antes e depois",
+    title: "Diferenca gritante",
+    sub: "Comparacao visual direta. A prova acontece na tela, antes de qualquer argumento.",
+    driveId: "1qQupHfhq9CYcUzplAE-bnk9S-Ak8aV-A",
+    script: "Com a Mascara Regenerativa da Le Moritz //// Sem a Mascara Regenerativa da Le Moritz.\n\nGente, olha essa diferenca gritante. Eu tenho cilios ralos, que foram sumindo com o tempo, entao eu demorei, mas finalmente encontrei uma mascara que deixasse meus cilios assim.\n\nE essa, alem de dar volume, ela regenera enquanto voce usa. Fortalece o cilio mesmo, e tratamento e maquiagem ao mesmo tempo. E o aplicador e pensado pra pegar ate nos cilios mais curtos e escondidos, o que da esse efeito bonita-de-verdade que nao some no fim do dia.\n\nPerfeita. To encantada.\n\nSe voce tambem ta precisando de uma mascara assim, clica aqui no carrinho laranja e faz seu pedido.",
+    tips: [
+      "O //// e uma divisoria visual - coloque o texto na tela dividindo o antes/depois no corte do video.",
+      "Grave o olho bem de perto, com boa luz, nos dois momentos. A prova visual e o que converte.",
+      "Bonita-de-verdade e um gancho emocional forte - explore com sua propria linguagem se preferir."
+    ]
+  },
+  {
+    id: 3,
+    product: "serum",
+    productLabel: "Serum redutor",
+    format: "Demonstracao ao vivo",
+    title: "3 minutos em tempo real",
+    sub: "A espera cria tensao e mantem o espectador ate o fim para ver o resultado.",
+    driveId: "1zMMbwBC5LtEy5b4nCzyynkjQpk-45rcc",
+    script: "Prontas? Literalmente 10 anos mais jovem.\n\nEu tenho [SUA IDADE] anos e nunca vi um produto que funcionasse assim antes. Esse e o Serum Redutor Instantaneo de Linhas Le Moritz. Absolutamente insano.\n\nEu coloquei nas linhas da olheira e na parte de cima da palpebra. E olha - eu vou provar pra voces agora. Espera comigo que leva 3 minutinhos.\n\nVoces ja podem ver a diferenca. E realmente louco. Eu preciso de um estoque desse.\n\nE o melhor: ta disponivel agora, e so clicar no carrinho laranja. Eu pegaria enquanto da, porque nao vai durar. A prova ta ai, isso daqui e chocante.",
+    tips: [
+      "Substitua [SUA IDADE] pela sua idade real - a especificidade cria identificacao.",
+      "Grave em tempo real mesmo, mostrando o relogio ou contando em voz alta. O processo visivel e o diferencial desta ref.",
+      "Boa iluminacao lateral nao frontal destaca mais as linhas antes e depois da aplicacao."
+    ]
+  },
+  {
+    id: 4,
+    product: "serum",
+    productLabel: "Serum redutor",
+    format: "Gancho de texto",
+    title: "A mulher de 60 anos",
+    sub: "Curiosidade mais contraste de idade. Para o scroll antes de qualquer palavra ser dita.",
+    driveId: "1ZY7SsoZQ8QbMQIr_ubgKAXitGJW_QF3Q",
+    isOptions: true,
+    options: [
+      { label: "Opcao A - com idade propria mais narrativa", text: "Eu tenho [IDADE] anos e fui descobrir isso por causa de uma mulher de 60 que parecia ter 40. Perguntei o segredo dela e ela me mostrou isso." },
+      { label: "Opcao B - tom bem-humorado", text: "Nao me envergonho de dizer: eu copiei a skincare de uma senhora de 60 anos porque ela tava ARRASANDO." },
+      { label: "Opcao C - direto ao ponto", text: "Uma mulher de 60 anos me ensinou a nao precisar de procedimentos." }
+    ],
+    tips: [
+      "Esses ganchos funcionam como texto sobreposto no inicio - combine com o roteiro da Ref 3.",
+      "A opcao C para o scroll mais rapido. A opcao A funciona melhor em videos mais longos.",
+      "Se voce tiver uma historia real parecida, adapte com seus detalhes - fica muito mais autentico."
+    ]
+  }
+];
+
+var currentFilter = "all";
+
+function driveUrl(id) {
+  return "https://drive.google.com/file/d/" + id + "/view";
+}
+
+function renderCards() {
+  var grid = document.getElementById("grid");
+  var list = currentFilter === "all" ? REFS : REFS.filter(function(r) { return r.product === currentFilter; });
+  var html = "";
+  for (var i = 0; i < list.length; i++) {
+    var r = list[i];
+    var thumbClass = r.product === "mascara" ? "thumb-mascara" : "thumb-serum";
+    var tagClass = r.product === "mascara" ? "tag-mascara" : "tag-serum";
+    html += "<div class=\"card\" onclick=\"openModal(" + r.id + ")\">";
+    html += "<div class=\"card-thumb\"><div class=\"card-thumb-inner " + thumbClass + "\">";
+    html += "<span class=\"thumb-num\">" + r.id + "</span>";
+    html += "<span class=\"thumb-label\">" + r.productLabel + "</span>";
+    html += "</div>";
+    html += "<div class=\"thumb-overlay\"><div class=\"play-btn\"><svg width=\"14\" height=\"14\" viewBox=\"0 0 14 14\" fill=\"none\"><path d=\"M3 2l9 5-9 5V2z\" fill=\"#1A1410\"/></svg></div></div>";
+    html += "</div>";
+    html += "<div class=\"card-body\">";
+    html += "<div class=\"card-tags\"><span class=\"tag " + tagClass + "\">" + r.productLabel + "</span><span class=\"tag tag-format\">" + r.format + "</span></div>";
+    html += "<div class=\"card-title\">" + r.title + "</div>";
+    html += "<div class=\"card-sub\">" + r.sub + "</div>";
+    html += "<div class=\"card-footer\"><span class=\"ref-num\">Ref " + r.id + "</span>";
+    html += "<div class=\"arrow-btn\"><svg width=\"12\" height=\"12\" viewBox=\"0 0 12 12\" fill=\"none\"><path d=\"M1 6h10M7 2l4 4-4 4\" stroke=\"#1A1410\" stroke-width=\"1.2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/></svg></div>";
+    html += "</div></div></div>";
+  }
+  grid.innerHTML = html;
+}
+
+function filterRefs(f) {
+  currentFilter = f;
+  document.getElementById("btn-all").className = "filter-btn" + (f === "all" ? " active" : "");
+  document.getElementById("btn-mascara").className = "filter-btn" + (f === "mascara" ? " active" : "");
+  document.getElementById("btn-serum").className = "filter-btn" + (f === "serum" ? " active" : "");
+  renderCards();
+}
+
+function openModal(id) {
+  var ref = null;
+  for (var i = 0; i < REFS.length; i++) {
+    if (REFS[i].id === id) { ref = REFS[i]; break; }
+  }
+  if (!ref) return;
+
+  var leftClass = "modal-left " + (ref.product === "mascara" ? "modal-left-mascara" : "modal-left-serum");
+  var dotClass = ref.product === "mascara" ? "dot-mascara" : "dot-serum";
+  var tagClass = ref.product === "mascara" ? "tag-mascara" : "tag-serum";
+
+  var leftHtml = "<span class=\"modal-big-num\">" + ref.id + "</span>";
+  leftHtml += "<span class=\"modal-fmt\">" + ref.format + "</span>";
+  leftHtml += "<div class=\"modal-vid-title\">" + ref.title + "</div>";
+  leftHtml += "<a class=\"watch-btn\" href=\"" + driveUrl(ref.driveId) + "\" target=\"_blank\" rel=\"noopener\" onclick=\"event.stopPropagation()\">";
+  leftHtml += "<svg width=\"14\" height=\"14\" viewBox=\"0 0 14 14\" fill=\"none\"><path d=\"M2 7h10M8 3l4 4-4 4\" stroke=\"white\" stroke-width=\"1.2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/></svg>";
+  leftHtml += "Assistir no Drive</a>";
+
+  var rightHtml = "<div class=\"modal-tags\"><span class=\"tag " + tagClass + "\">" + ref.productLabel + "</span><span class=\"tag tag-format\">" + ref.format + "</span></div>";
+  rightHtml += "<div class=\"modal-title\">Ref " + ref.id + " - " + ref.title + "</div>";
+
+  if (ref.isOptions) {
+    rightHtml += "<div><div class=\"section-label\">Ganchos sugeridos - escolha um</div>";
+    for (var j = 0; j < ref.options.length; j++) {
+      rightHtml += "<div class=\"option-block\"><div class=\"option-lbl\">" + ref.options[j].label + "</div><div class=\"option-txt\">" + ref.options[j].text + "</div></div>";
+    }
+    rightHtml += "</div>";
+  } else {
+    rightHtml += "<div><div class=\"section-label\">Roteiro sugerido</div><div class=\"script-box\">" + ref.script + "</div></div>";
+  }
+
+  rightHtml += "<div><div class=\"section-label\">Dicas de adaptacao</div><div class=\"tips\">";
+  for (var k = 0; k < ref.tips.length; k++) {
+    rightHtml += "<div class=\"tip\"><span class=\"tip-dot " + dotClass + "\"></span><span>" + ref.tips[k] + "</span></div>";
+  }
+  rightHtml += "</div></div>";
+  rightHtml += "<button class=\"copy-btn\" id=\"copybtn\" onclick=\"doCopy(" + ref.id + ")\">";
+  rightHtml += "<svg width=\"13\" height=\"13\" viewBox=\"0 0 16 16\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.5\"><rect x=\"5\" y=\"5\" width=\"9\" height=\"9\" rx=\"1.5\"/><path d=\"M11 5V3.5A1.5 1.5 0 009.5 2h-6A1.5 1.5 0 002 3.5v6A1.5 1.5 0 003.5 11H5\"/></svg>";
+  rightHtml += "Copiar " + (ref.isOptions ? "ganchos" : "roteiro") + "</button>";
+
+  var leftEl = document.getElementById("modal-left");
+  leftEl.className = leftClass;
+  leftEl.innerHTML = leftHtml;
+  document.getElementById("modal-right").innerHTML = rightHtml;
+  document.getElementById("backdrop").className = "backdrop open";
+  document.body.style.overflow = "hidden";
+}
+
+function closeModal() {
+  document.getElementById("backdrop").className = "backdrop";
+  document.getElementById("modal-left").innerHTML = "";
+  document.getElementById("modal-right").innerHTML = "";
+  document.body.style.overflow = "";
+}
+
+function closeOutside(e) {
+  if (e.target === document.getElementById("backdrop")) closeModal();
+}
+
+function doCopy(id) {
+  var ref = null;
+  for (var i = 0; i < REFS.length; i++) {
+    if (REFS[i].id === id) { ref = REFS[i]; break; }
+  }
+  if (!ref) return;
+  var text = "";
+  if (ref.isOptions) {
+    for (var j = 0; j < ref.options.length; j++) {
+      text += ref.options[j].label + "\n" + ref.options[j].text + "\n\n";
+    }
+  } else {
+    text = ref.script;
+  }
+  navigator.clipboard.writeText(text.trim()).then(function() {
+    var btn = document.getElementById("copybtn");
+    if (!btn) return;
+    btn.className = "copy-btn done";
+    btn.innerHTML = "<svg width=\"13\" height=\"13\" viewBox=\"0 0 14 14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.5\"><path d=\"M2 7l4 4 6-7\"/></svg> Copiado!";
+    setTimeout(function() {
+      if (!ref) return;
+      btn.className = "copy-btn";
+      btn.innerHTML = "<svg width=\"13\" height=\"13\" viewBox=\"0 0 16 16\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.5\"><rect x=\"5\" y=\"5\" width=\"9\" height=\"9\" rx=\"1.5\"/><path d=\"M11 5V3.5A1.5 1.5 0 009.5 2h-6A1.5 1.5 0 002 3.5v6A1.5 1.5 0 003.5 11H5\"/></svg> Copiar " + (ref.isOptions ? "ganchos" : "roteiro");
+    }, 2000);
+  });
+}
+
+document.addEventListener("keydown", function(e) { if (e.key === "Escape") closeModal(); });
+
+renderCards();
+</script>
+</body>
+</html>
