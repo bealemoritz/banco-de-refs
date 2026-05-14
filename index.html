@@ -83,6 +83,7 @@ header { padding: 3rem 2rem 1.5rem; max-width: 1100px; margin: 0 auto; }
 .modal-title { font-family: "DM Serif Display", serif; font-size: 1.4rem; line-height: 1.2; color: var(--ink); }
 .section-label { font-size: 0.62rem; font-weight: 500; text-transform: uppercase; letter-spacing: 0.1em; color: var(--muted); margin-bottom: 8px; }
 .script-box { background: var(--cream); border-radius: 10px; padding: 1rem; font-size: 0.8rem; line-height: 1.8; color: var(--ink); white-space: pre-wrap; font-weight: 300; }
+.script-box em { font-style: italic; color: var(--muted); }
 .option-block { background: var(--cream); border-radius: 10px; padding: 11px 14px; margin-bottom: 8px; }
 .option-lbl { font-size: 0.62rem; font-weight: 500; text-transform: uppercase; letter-spacing: 0.08em; color: #1E6657; margin-bottom: 5px; }
 .option-txt { font-size: 0.8rem; line-height: 1.7; color: var(--ink); font-weight: 300; }
@@ -285,6 +286,22 @@ var REFS = [
       "Um grãozinho de arroz é suficiente. Aplique com a ponteira metalizada na região dos olhos, em cima e embaixo.",
       "Dê batidinhas leves com o dedo para absorver e espere 90 segundos antes de revelar."
     ]
+  },
+  {
+    id: 10,
+    product: "serum",
+    productLabel: "Sérum redutor",
+    format: "Tempo real sem corte",
+    title: "Do apagado ao esticado",
+    sub: "Um lado com o sérum, um lado sem. A câmera não sai do lugar. A prova acontece ao vivo.",
+    driveId: "1Nu03fVddv6BoIK1eUex7dCzYa0HrZXUv",
+    script: "(Câmera no rosto, sem filtro, mostrando as linhas de expressão. A ambientação do carro é ótima, chama atenção e traz uma iluminação natural ótima)\nPodem julgar minha cara, tá? Mas depois que eu mostrar esse sérum em ação, vocês vão entender.\nE eu vou mostrar pra vocês em tempo real. Sem corte. Sem edição. Sem filtro.\n\n(Aplica de um lado só, agita antes, ponteira metalizada, batidinhas)\nApliquei só de um lado. Agora a gente espera 90 segundos.\n\n(Aqui pode ser um ótimo momento de papear com as seguidoras, qualquer assunto, só com um olho tapado, enquanto espera o resultado)\n\n(Revela os dois lados)\nOlha pra isso. Efeito cinderela, em tempo real.\nA diferença entre um lado e o outro. Desculpa, o quê?\nVocê precisa de tão pouco produto, então dura muito tempo. E tá aqui no TikTok Shop no carrinho laranja. O preço é surreal pra um resultado assim. Corre.",
+    tips: [
+      "Tempo real sem corte: fala isso em voz alta no vídeo. A ausência de edição é a prova. Quem assiste sente que não tem truque.",
+      "Um lado só: aplique o sérum apenas de um lado do rosto. A comparação lado a lado é o que gera o momento de surpresa — e é o que faz as pessoas pararem o scroll.",
+      "O roteiro pode ficar ainda melhor se você inserir um assunto que chame atenção no meio do vídeo, enquanto espera o resultado!",
+      "⚠️ Não esqueça da aplicação correta: agite o produto antes, use um grãozinho de arroz com a ponteira metalizada, dê batidinhas leves e espere 90 segundos."
+    ]
   }
 ];
 
@@ -292,6 +309,21 @@ var currentFilter = "all";
 
 function driveUrl(id) {
   return "https://drive.google.com/file/d/" + id + "/view";
+}
+
+function formatScript(text) {
+  // Convert (text in parentheses) to italic em tags, then convert newlines to <br>
+  var escaped = text
+    .replace(/\(([^)]+)\)/g, "<em>($1)</em>");
+  var lines = escaped.split("\n");
+  var result = "";
+  for (var i = 0; i < lines.length; i++) {
+    result += lines[i];
+    if (i < lines.length - 1) {
+      result += lines[i] === "" ? "\n" : "\n";
+    }
+  }
+  return result;
 }
 
 function thumbUrl(r) {
@@ -361,7 +393,7 @@ function openModal(id) {
     }
     rightHtml += "</div>";
   } else {
-    rightHtml += "<div><div class=\"section-label\">Roteiro sugerido</div><div class=\"script-box\">" + ref.script + "</div></div>";
+    rightHtml += "<div><div class=\"section-label\">Roteiro sugerido</div><div class=\"script-box\" style=\"white-space:pre-wrap\">" + formatScript(ref.script) + "</div></div>";
   }
 
   rightHtml += "<div><div class=\"section-label\">Dicas de adaptacao</div><div class=\"tips\">";
