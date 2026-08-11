@@ -41,6 +41,7 @@ header { padding: 3rem 2rem 1.5rem; max-width: 1100px; margin: 0 auto; }
 .card-thumb-inner { width: 100%; height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px; }
 .thumb-mascara { background: linear-gradient(160deg, #3d1f2a 0%, #1A1410 100%); }
 .thumb-serum { background: linear-gradient(160deg, #1f2a3d 0%, #111a1a 100%); }
+.thumb-sticks { background: linear-gradient(160deg, #4a2438 0%, #1A1410 100%); }
 .thumb-img { width: 100%; height: 100%; object-fit: cover; display: block; }
 .thumb-fallback { width: 100%; height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px; }
 .thumb-num { font-family: "DM Serif Display", serif; font-size: 5rem; line-height: 1; color: rgba(255,255,255,0.08); }
@@ -54,6 +55,7 @@ header { padding: 3rem 2rem 1.5rem; max-width: 1100px; margin: 0 auto; }
 .tag { font-size: 0.62rem; font-weight: 500; letter-spacing: 0.06em; text-transform: uppercase; padding: 3px 10px; border-radius: 100px; }
 .tag-mascara { background: #FDE8E0; color: #9B3E2A; }
 .tag-serum { background: #DCF0EA; color: #1E6657; }
+.tag-sticks { background: #F5E1E9; color: #9C3F6B; }
 .tag-format { background: var(--cream); color: var(--muted); }
 .card-title { font-family: "DM Serif Display", serif; font-size: 1.05rem; line-height: 1.25; color: var(--ink); }
 .card-sub { font-size: 0.76rem; color: var(--muted); font-weight: 300; line-height: 1.5; }
@@ -68,6 +70,7 @@ header { padding: 3rem 2rem 1.5rem; max-width: 1100px; margin: 0 auto; }
 .modal-left { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 1.25rem; padding: 2.5rem 2rem; position: relative; min-height: 420px; overflow: hidden; }
 .modal-left-mascara { background: linear-gradient(160deg, #3d1f2a 0%, #1A1410 100%); }
 .modal-left-serum { background: linear-gradient(160deg, #1f2a3d 0%, #111a1a 100%); }
+.modal-left-sticks { background: linear-gradient(160deg, #4a2438 0%, #1A1410 100%); }
 .modal-thumb-bg { position: absolute; inset: -20px; background-size: cover; background-position: center; filter: blur(18px) brightness(0.45); transform: scale(1.1); }
 .modal-big-num { font-family: "DM Serif Display", serif; font-size: 7rem; color: rgba(255,255,255,0.12); position: absolute; bottom: 1rem; right: 1.5rem; line-height: 1; z-index: 1; }
 .modal-fmt { font-size: 0.62rem; letter-spacing: 0.15em; text-transform: uppercase; color: rgba(255,255,255,0.5); z-index: 1; }
@@ -92,6 +95,7 @@ header { padding: 3rem 2rem 1.5rem; max-width: 1100px; margin: 0 auto; }
 .tip-dot { width: 4px; height: 4px; border-radius: 50%; flex-shrink: 0; margin-top: 7px; }
 .dot-mascara { background: #C4705A; }
 .dot-serum { background: #3A7068; }
+.dot-sticks { background: #9C3F6B; }
 .copy-btn { display: inline-flex; align-items: center; gap: 8px; padding: 9px 18px; border-radius: 10px; border: 1px solid var(--border); background: transparent; font-family: "DM Sans", sans-serif; font-size: 0.78rem; color: var(--ink); cursor: pointer; transition: all 0.2s; align-self: flex-start; margin-top: auto; }
 .copy-btn:hover { background: var(--ink); color: white; }
 .copy-btn.done { background: #3A7068; color: white; border-color: #3A7068; }
@@ -118,6 +122,7 @@ header { padding: 3rem 2rem 1.5rem; max-width: 1100px; margin: 0 auto; }
   <button class="filter-btn active" id="btn-all" onclick="filterRefs('all')">Todos</button>
   <button class="filter-btn" id="btn-mascara" onclick="filterRefs('mascara')">Máscara de cílios</button>
   <button class="filter-btn" id="btn-serum" onclick="filterRefs('serum')">Sérum redutor</button>
+  <button class="filter-btn" id="btn-sticks" onclick="filterRefs('sticks')">Sticks</button>
 </div>
 
 <hr class="divider">
@@ -364,10 +369,32 @@ var REFS = [
       "Espera 90 segundos sem fazer expressão facial: fala isso em voz alta, cria expectativa real de quem assiste.",
       "Compare com o custo de um procedimento estético ou sessão de skin care — reforça custo-benefício sem precisar citar preço exato."
     ]
+  },
+  {
+    id: 15,
+    product: "sticks",
+    productLabel: "Sticks",
+    format: "Demonstração multiuso",
+    title: "Quatro funções, um stick",
+    sub: "Mostra o mesmo stick virando blush e batom ao vivo, provando o multiuso e o look monocromático na hora.",
+    driveId: "1J2CLtbYhMQH1331ydoxEM9_M5iYtERJd",
+    script: "(Mostra os 4 sticks na mão)\nMarrom Café. Rosa Mauve. Terracota. E o Rosé iluminador.\n\nA Le Moritz lançou esses sticks cor e eu não consigo parar de usar.\n\nCada um é multiuso: blush, contorno, batom e sombra num produto só. Quatro funções, um stick.\n\n(Testa na mão primeiro)\nOlha a textura. Ela desliza, pigmenta e dá aquele glow saudável que a gente busca em tudo.\n\n(Aplica no rosto)\nVou com o Rosa Mauve hoje. Direto no rosto mesmo.\n\n(Aplica como blush, esfuma)\nÉ só esfumar com o dedo. Olha como fica natural, como se fosse da pele.\n\n(Passa nos lábios)\nAgora nos lábios. O mesmo produto. Mesma cor, look monocromático completo.\n\nEu vivo por um momento assim, tudo combinando, tudo fácil, sem precisar de dez produtos diferentes.\n\nTá no carrinho laranja aqui. Cada cor é uma vibe diferente, mas honestamente? Eu pegaria todos.",
+    tips: [
+      "Mostre as 4 cores na mão logo no início. A variedade é o gancho visual, antes de qualquer palavra.",
+      "Teste a textura na mão antes de aplicar no rosto: desliza, pigmenta, dá glow. Nomear os 3 atributos enquanto mostra reforça a demonstração.",
+      "O look monocromático (mesma cor no rosto e nos lábios) é o clímax do vídeo. É o que gera o quero isso em quem assiste.",
+      "Feche mencionando o carrinho laranja e a ideia de levar mais de uma cor, isso ajuda a aumentar o ticket médio."
+    ]
   }
 ];
 
 var currentFilter = "all";
+
+var PRODUCT_META = {
+  mascara: { thumbClass: "thumb-mascara", tagClass: "tag-mascara", dotClass: "dot-mascara", modalClass: "modal-left-mascara" },
+  serum: { thumbClass: "thumb-serum", tagClass: "tag-serum", dotClass: "dot-serum", modalClass: "modal-left-serum" },
+  sticks: { thumbClass: "thumb-sticks", tagClass: "tag-sticks", dotClass: "dot-sticks", modalClass: "modal-left-sticks" }
+};
 
 function driveUrl(id) {
   return "https://drive.google.com/file/d/" + id + "/view";
@@ -398,8 +425,9 @@ function renderCards() {
   var html = "";
   for (var i = 0; i < list.length; i++) {
     var r = list[i];
-    var fallbackClass = r.product === "mascara" ? "thumb-mascara" : "thumb-serum";
-    var tagClass = r.product === "mascara" ? "tag-mascara" : "tag-serum";
+    var meta = PRODUCT_META[r.product];
+    var fallbackClass = meta.thumbClass;
+    var tagClass = meta.tagClass;
     html += "<div class=\"card\" onclick=\"openModal(" + r.id + ")\">";
     html += "<div class=\"card-thumb\">";
     html += "<div class=\"card-thumb-inner " + fallbackClass + "\" id=\"thumb-wrap-" + r.id + "\">";
@@ -423,6 +451,7 @@ function filterRefs(f) {
   document.getElementById("btn-all").className = "filter-btn" + (f === "all" ? " active" : "");
   document.getElementById("btn-mascara").className = "filter-btn" + (f === "mascara" ? " active" : "");
   document.getElementById("btn-serum").className = "filter-btn" + (f === "serum" ? " active" : "");
+  document.getElementById("btn-sticks").className = "filter-btn" + (f === "sticks" ? " active" : "");
   renderCards();
 }
 
@@ -433,9 +462,10 @@ function openModal(id) {
   }
   if (!ref) return;
 
-  var leftClass = "modal-left " + (ref.product === "mascara" ? "modal-left-mascara" : "modal-left-serum");
-  var dotClass = ref.product === "mascara" ? "dot-mascara" : "dot-serum";
-  var tagClass = ref.product === "mascara" ? "tag-mascara" : "tag-serum";
+  var meta = PRODUCT_META[ref.product];
+  var leftClass = "modal-left " + meta.modalClass;
+  var dotClass = meta.dotClass;
+  var tagClass = meta.tagClass;
 
   var leftHtml = "<div class=\"modal-thumb-bg\" style=\"background-image: url('" + thumbUrl(ref) + "')\"></div>";
   leftHtml += "<span class=\"modal-big-num\">" + ref.id + "</span>";
