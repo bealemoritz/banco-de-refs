@@ -385,6 +385,22 @@ var REFS = [
       "O look monocromático (mesma cor no rosto e nos lábios) é o clímax do vídeo. É o que gera o quero isso em quem assiste.",
       "Feche mencionando o carrinho laranja e a ideia de levar mais de uma cor, isso ajuda a aumentar o ticket médio."
     ]
+  },
+  {
+    id: 16,
+    product: "sticks",
+    productLabel: "Sticks",
+    format: "Swatch multiuso",
+    title: "Isso é literalmente manteiga",
+    sub: "Bolinhas de cada cor no rosto logo no início: mostra pigmentação, textura e variedade em segundos, antes de qualquer argumento.",
+    driveId: "1uL6N0Dxfxdhpzxt3kyZC3C4CpCxyhdUo",
+    script: "(Começa fazendo uma bolinha de cada cor no rosto, nomeando enquanto aplica)\nTerracota. Rosa Mauve. Marrom Café. E o Rosé iluminador.\nParei de usar maquiagem em pó depois que eu encontrei esses sticks cor pra fazer maquiagem sem marcar as linhas de expressão!\n\n(Mostra os sticks e começa a esfumar)\nAdoro que você consegue trabalhar cada área com precisão. Perfeito pra fazer aquele contorno e aquele blush bem esfumado.\n\nIsso é literalmente manteiga.\n\n(Mostra a textura de perto)\nOlha como derrete na pele. Eu mal to tocando o rosto e já tá integrado.\n\n(Aplica o Rosé como iluminador)\nA pele fica com um glow. Isso não me surpreende porque a fórmula já tem esse skincare sensacional embutido.\n\nE é multiuso. Eles fazem absolutamente tudo que precisa em uma make: blush, contorno, sombra, batom. Tudo com um único bastão.\nSe você tá vendo aqui no carrinho laranja, pega agora, porque tá em oferta!",
+    tips: [
+      "As bolinhas de cada cor no rosto logo no início são o gancho: pigmentação, textura e variedade aparecem em segundos, antes de qualquer argumento. Quem assiste já fica curiosa pra saber qual cor é a dela.",
+      "Filme bem perto da pele no momento de aplicar: mostrar a textura derretendo (é literalmente manteiga) prova a promessa sem precisar explicar.",
+      "Mencione que a fórmula já tem skincare embutido: reforça que o glow é resultado do produto, não só de maquiagem.",
+      "Feche puxando o multiuso (blush, contorno, sombra, batom, um bastão só) junto com a urgência da oferta no carrinho laranja."
+    ]
   }
 ];
 
@@ -421,7 +437,8 @@ function thumbUrl(r) {
 
 function renderCards() {
   var grid = document.getElementById("grid");
-  var list = currentFilter === "all" ? REFS : REFS.filter(function(r) { return r.product === currentFilter; });
+  var list = currentFilter === "all" ? REFS.slice() : REFS.filter(function(r) { return r.product === currentFilter; });
+  list.sort(function(a, b) { return b.id - a.id; });
   var html = "";
   for (var i = 0; i < list.length; i++) {
     var r = list[i];
