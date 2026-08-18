@@ -401,6 +401,31 @@ var REFS = [
       "Mencione que a fórmula já tem skincare embutido: reforça que o glow é resultado do produto, não só de maquiagem.",
       "Feche puxando o multiuso (blush, contorno, sombra, batom, um bastão só) junto com a urgência da oferta no carrinho laranja."
     ]
+  },
+  {
+    id: 17,
+    product: "sticks",
+    productLabel: "Sticks",
+    format: "Pergunta e resposta",
+    title: "Será que vale a pena?",
+    sub: "Abre perguntando se o produto vale a pena e corta direto pro resultado já maquiado: a dúvida vira prova em segundos.",
+    driveId: "1FaIvIb5Xl_Sa9Xg9Vm_0oaIGlk58h1aV",
+    variants: [
+      {
+        label: "Versão Rosa Mauve",
+        script: "(Sem blush no rosto, segurando o stick com o bastão pra cima pra mostrar a cor)\nSerá que o stick Rosa Mauve da Le Moritz vale a pena?\n\n(Corte rápido, já maquiada)\nSim, vale muito a pena. Deixa eu te mostrar.\n\n(Mostra o stick de perto, sem blush no rosto, começando a aplicar)\nFormato em stick, naquela fórmula cremosa e impecável. E o tom é um rosa queimado lindo, super versátil.\n\n(Começa a esfumar dando batidinhas)\nComo eu gosto de aplicar esse tom é dando batidinhas na parte mais alta da maçã do rosto. Dá pra trabalhar cada área com precisão.\n\n(Mostra a textura de perto)\nIsso é literalmente manteiga. Olha como derrete na pele, eu mal tô tocando o rosto e já virou parte da pele.\nEu sei que esse rosa parece forte no stick, mas me fala que não fica um efeito super natural, tipo coradinha de dentro pra fora? E se você quiser aplicar com os dedos, também dá.\n\n(Aplica na boca)\nNa minha opinião, essa é a melhor maneira de aplicar na boca.\nE é multiuso: blush, contorno, sombra, batom. Tudo com um único bastão, e ainda com aquele skincare embutido na fórmula.\nTemos aqui uma make completa. Se você tá vendo no carrinho laranja, pega agora, porque tá em oferta!"
+      },
+      {
+        label: "Versão Terracota",
+        script: "(Sem blush no rosto, segurando o stick com o bastão pra cima pra mostrar a cor)\nSerá que o stick Terracota da Le Moritz vale a pena?\n\n(Corte rápido, já maquiada)\nSim, vale muito a pena. Deixa eu te mostrar.\n\n(Mostra o stick de perto, sem blush no rosto, começando a aplicar)\nFormato em stick, naquela fórmula cremosa e impecável. E o tom é um terracota bem queimadinho.\n\n(Começa a esfumar dando batidinhas)\nComo eu gosto de aplicar esse tom é dando batidinhas na região mais central do rosto. Dá pra trabalhar cada área com precisão.\n\n(Mostra a textura de perto)\nIsso é literalmente manteiga. Olha como derrete na pele, eu mal tô tocando o rosto e já virou parte da pele.\nEu sei que a cor aqui assusta, mas me fala que não parece que eu tomei um solzinho? E se você quiser aplicar com os dedos, também dá.\n\n(Aplica na boca)\nNa minha opinião, essa é a melhor maneira de aplicar na boca.\nE é multiuso: blush, contorno, sombra, batom. Tudo com um único bastão, e ainda com aquele skincare embutido na fórmula.\nTemos aqui uma make completa. Se você tá vendo no carrinho laranja, pega agora, porque tá em oferta!"
+      }
+    ],
+    tips: [
+      "A pergunta será que vale a pena seguida do corte rápido pro resultado já maquiado prova a promessa em segundos, sem precisar convencer com palavras.",
+      "Troque a cor e o adjetivo do tom conforme o produto (aqui: rosa queimado x terracota bem queimadinho) para adaptar pra outras cores da linha de sticks.",
+      "Mostrar a aplicação nos lábios também é parte do gancho: prova o multiuso na prática, não só na fala.",
+      "Feche sempre com o multiuso (blush, contorno, sombra, batom, um bastão só) e a chamada pro carrinho laranja com senso de oferta."
+    ]
   }
 ];
 
@@ -495,7 +520,15 @@ function openModal(id) {
   var rightHtml = "<div class=\"modal-tags\"><span class=\"tag " + tagClass + "\">" + ref.productLabel + "</span><span class=\"tag tag-format\">" + ref.format + "</span></div>";
   rightHtml += "<div class=\"modal-title\">Ref " + ref.id + " - " + ref.title + "</div>";
 
-  if (ref.isOptions) {
+  if (ref.variants) {
+    rightHtml += "<div><div class=\"section-label\">Roteiros sugeridos</div>";
+    for (var v = 0; v < ref.variants.length; v++) {
+      if (v > 0) rightHtml += "<div style=\"height:12px\"></div>";
+      rightHtml += "<div class=\"option-lbl\" style=\"margin-bottom:6px\">" + ref.variants[v].label + "</div>";
+      rightHtml += "<div class=\"script-box\" style=\"white-space:pre-wrap\">" + formatScript(ref.variants[v].script) + "</div>";
+    }
+    rightHtml += "</div>";
+  } else if (ref.isOptions) {
     rightHtml += "<div><div class=\"section-label\">Ganchos sugeridos - escolha um</div>";
     for (var j = 0; j < ref.options.length; j++) {
       rightHtml += "<div class=\"option-block\"><div class=\"option-lbl\">" + ref.options[j].label + "</div><div class=\"option-txt\">" + ref.options[j].text + "</div></div>";
@@ -510,9 +543,21 @@ function openModal(id) {
     rightHtml += "<div class=\"tip\"><span class=\"tip-dot " + dotClass + "\"></span><span>" + ref.tips[k] + "</span></div>";
   }
   rightHtml += "</div></div>";
-  rightHtml += "<button class=\"copy-btn\" id=\"copybtn\" onclick=\"doCopy(" + ref.id + ")\">";
-  rightHtml += "<svg width=\"13\" height=\"13\" viewBox=\"0 0 16 16\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.5\"><rect x=\"5\" y=\"5\" width=\"9\" height=\"9\" rx=\"1.5\"/><path d=\"M11 5V3.5A1.5 1.5 0 009.5 2h-6A1.5 1.5 0 002 3.5v6A1.5 1.5 0 003.5 11H5\"/></svg>";
-  rightHtml += "Copiar " + (ref.isOptions ? "ganchos" : "roteiro") + "</button>";
+
+  if (ref.variants) {
+    rightHtml += "<div style=\"display:flex;gap:8px;flex-wrap:wrap;margin-top:auto\">";
+    for (var v2 = 0; v2 < ref.variants.length; v2++) {
+      var shortLabel = ref.variants[v2].label.replace(/^Vers[aã]o /i, "");
+      rightHtml += "<button class=\"copy-btn\" id=\"copybtn-v" + v2 + "\" onclick=\"doCopyVariant(" + ref.id + "," + v2 + ")\" style=\"margin-top:0\">";
+      rightHtml += "<svg width=\"13\" height=\"13\" viewBox=\"0 0 16 16\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.5\"><rect x=\"5\" y=\"5\" width=\"9\" height=\"9\" rx=\"1.5\"/><path d=\"M11 5V3.5A1.5 1.5 0 009.5 2h-6A1.5 1.5 0 002 3.5v6A1.5 1.5 0 003.5 11H5\"/></svg>";
+      rightHtml += "Copiar " + shortLabel + "</button>";
+    }
+    rightHtml += "</div>";
+  } else {
+    rightHtml += "<button class=\"copy-btn\" id=\"copybtn\" onclick=\"doCopy(" + ref.id + ")\">";
+    rightHtml += "<svg width=\"13\" height=\"13\" viewBox=\"0 0 16 16\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.5\"><rect x=\"5\" y=\"5\" width=\"9\" height=\"9\" rx=\"1.5\"/><path d=\"M11 5V3.5A1.5 1.5 0 009.5 2h-6A1.5 1.5 0 002 3.5v6A1.5 1.5 0 003.5 11H5\"/></svg>";
+    rightHtml += "Copiar " + (ref.isOptions ? "ganchos" : "roteiro") + "</button>";
+  }
 
   var leftEl = document.getElementById("modal-left");
   leftEl.className = leftClass;
@@ -556,6 +601,26 @@ function doCopy(id) {
       if (!ref) return;
       btn.className = "copy-btn";
       btn.innerHTML = "<svg width=\"13\" height=\"13\" viewBox=\"0 0 16 16\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.5\"><rect x=\"5\" y=\"5\" width=\"9\" height=\"9\" rx=\"1.5\"/><path d=\"M11 5V3.5A1.5 1.5 0 009.5 2h-6A1.5 1.5 0 002 3.5v6A1.5 1.5 0 003.5 11H5\"/></svg> Copiar " + (ref.isOptions ? "ganchos" : "roteiro");
+    }, 2000);
+  });
+}
+
+function doCopyVariant(id, idx) {
+  var ref = null;
+  for (var i = 0; i < REFS.length; i++) {
+    if (REFS[i].id === id) { ref = REFS[i]; break; }
+  }
+  if (!ref || !ref.variants || !ref.variants[idx]) return;
+  var text = ref.variants[idx].script;
+  var shortLabel = ref.variants[idx].label.replace(/^Vers[aã]o /i, "");
+  navigator.clipboard.writeText(text.trim()).then(function() {
+    var btn = document.getElementById("copybtn-v" + idx);
+    if (!btn) return;
+    btn.className = "copy-btn done";
+    btn.innerHTML = "<svg width=\"13\" height=\"13\" viewBox=\"0 0 14 14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.5\"><path d=\"M2 7l4 4 6-7\"/></svg> Copiado!";
+    setTimeout(function() {
+      btn.className = "copy-btn";
+      btn.innerHTML = "<svg width=\"13\" height=\"13\" viewBox=\"0 0 16 16\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.5\"><rect x=\"5\" y=\"5\" width=\"9\" height=\"9\" rx=\"1.5\"/><path d=\"M11 5V3.5A1.5 1.5 0 009.5 2h-6A1.5 1.5 0 002 3.5v6A1.5 1.5 0 003.5 11H5\"/></svg> Copiar " + shortLabel;
     }, 2000);
   });
 }
