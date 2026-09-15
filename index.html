@@ -48,6 +48,8 @@ header { padding: 3rem 2rem 1.5rem; max-width: 1100px; margin: 0 auto; }
 .thumb-label { font-size: 0.62rem; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(255,255,255,0.28); text-align: center; padding: 0 1rem; }
 .thumb-overlay { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; background: rgba(26,20,16,0.4); opacity: 0; transition: opacity 0.2s; }
 .card:hover .thumb-overlay { opacity: 1; }
+.card-badge-star { position: absolute; top: 10px; right: 10px; width: 28px; height: 28px; border-radius: 50%; background: rgba(26,20,16,0.35); display: flex; align-items: center; justify-content: center; z-index: 2; }
+.card-badge-viral { position: absolute; top: 10px; left: 10px; background: var(--accent); color: #fff; font-size: 0.62rem; font-weight: 500; letter-spacing: 0.04em; padding: 4px 10px; border-radius: 100px; z-index: 2; box-shadow: 0 2px 8px rgba(26,20,16,0.3); }
 .play-btn { width: 48px; height: 48px; border-radius: 50%; background: white; display: flex; align-items: center; justify-content: center; }
 
 .card-body { padding: 1.1rem 1.25rem 1.25rem; display: flex; flex-direction: column; gap: 8px; flex: 1; }
@@ -263,6 +265,7 @@ var REFS = [
     product: "serum",
     productLabel: "Sérum redutor",
     format: "Prova social familiar",
+    pinned: true,
     title: "A pele da minha vó tá assim",
     sub: "Alguém mais velho como prova real. Quanto mais linha de expressão, mais contrastante o resultado.",
     driveId: "1MlITXf352rGwLF67W3Yzsjjo0wN_Xwaq",
@@ -524,6 +527,60 @@ var REFS = [
       "Aplique ao vivo, sem cortes, e use o acelerado só durante a espera dos 3 minutos: mantém a sensação de tempo real sem cansar quem assiste.",
       "Feche com os dois lados lado a lado e uma foto do antes salva: o antes e depois completo é o que fecha a venda."
     ]
+  },
+  {
+    id: 24,
+    product: "serum",
+    productLabel: "Sérum redutor",
+    format: "Antes e depois",
+    title: "Tá vendo isso?",
+    sub: "Aponta pra baixo dos olhos e pergunta tá vendo isso?: o gancho já mostra o problema antes de qualquer produto aparecer, e o acelerado sem cortes prova o resultado ao vivo.",
+    driveId: "1yCgo65EoUXPZNTjyvB7IxmGZD1mVpvFq",
+    script: "(Headline na tela: Espera pra ver o resultado / Assista até o final / O final é chocante!)\n\n(Aponta pra baixo dos olhos, olhando pra câmera)\nTá vendo isso?\n\n(Aplica o Sérum Lifting Instantâneo da Le Moritz em um lado do rosto, abaixo dos olhos. Espera secar, vai abanando e acelera o vídeo. Não corta, deixa acelerado até o resultado final)\n\n(Quando o resultado estiver visível, mostra na câmera um lado com o sérum e um lado sem)\nSem mais bolsas, sem mais olheiras.\n\n(Apresenta o produto do seu jeito)\nEsse é o Sérum Lifting Instantâneo da Le Moritz. Tem os melhores ativos do mercado, e o efeito lifting dura até 8 horas. Tá vendendo rápido porque tá viralizando. O link tá aqui no carrinho laranja, corre que tá esgotando!",
+    tips: [
+      "Posicione o celular de frente pra uma janela ou lugar com luz natural, e não use filtro, efeito blur nem maquiagem.",
+      "Coloque como headline algo do tipo: Espera pra ver o resultado, Assista até o final, ou O final é chocante!",
+      "Aponte pra baixo dos olhos olhando pra câmera e diga: Tá vendo isso?",
+      "Aplique o sérum só de um lado do rosto, abaixo dos olhos. Espere secar, vá abanando e acelere o vídeo: não corte, deixe acelerado até o resultado final.",
+      "Quando o resultado estiver visível, mostre na câmera um lado com o sérum e um lado sem, e diga: sem mais bolsas, sem mais olheiras.",
+      "Depois disso, apresente o sérum do seu jeito: fale dos benefícios, diga que está esgotando rápido e que o link está no carrinho laranja."
+    ]
+  },
+  {
+    id: 25,
+    product: "serum",
+    productLabel: "Sérum redutor",
+    format: "Igualando os lados",
+    title: "Vou igualar os lados",
+    sub: "Começa com um lado já tratado e aplica ao vivo do outro lado pra igualar: a comparação lado a lado prova o efeito preenchedor nas rugas em tempo real.",
+    pinned: true,
+    viralBadge: true,
+    driveId: "19NtMO1Tgn1V4TTaeswW7oH0MhY4_mS30",
+    script: "(Um lado do rosto já tratado antes de começar a gravar)\nOlha como aqui tá bem mais preenchida as rugas. Agora eu vou passar do lado de cá pra igualar os lados.\n\n(Mostra a ponteira e aplica)\nVou passar com vocês aqui. Vou passar uma gotinha assim, ó. Ele tem essa ponteira que facilita bastante a aplicação. Passo com o próprio aplicador, nas regiões desejadas.\n\n(Dá batidinhas com a ponta dos dedos)\nE agora a gente vem dando batidinha com a ponta dos dedos. Agora é só esperar alguns minutinhos pro produto fazer efeito.\n\n(Revela o resultado, comparando os dois lados)\nEu passei o produto desse lado de cá, já tinha passado de cá, né, e passei de cá pra igualar. Olha a diferença que deu. Como preencheu as linhas, as rugas. Preencheu bem as rugas. Esticou bastante, olha.\n\nFica um pouco marcadinho porque, onde tem umas rugas bem profundas, fica mais clarinho, né. Então por isso que fica essas marcações aqui, mas tá bem lisinha a pele. Se passar uma maquiagem por cima, disfarça essas marquinhas brancas.\n\nMas deu muita diferença. O produto que eu usei foi esse daqui, ó, o Lift Instantâneo da Le Moritz. Ele é lift instantâneo, firmador, com efeito antigravidade, apaga imediatamente os sinais da idade. Tem efeito Botox Light por até 8 horas. E a Le Moritz tem uma linha exclusiva pra pele madura.\n\nEu comprei online mesmo. Vou deixar aqui o link, se tiver aparecendo é só clicar e comprar!",
+    tips: [
+      "Essa ref já começa com um lado do rosto tratado antes de gravar: você aplica ao vivo só no lado que falta, pra igualar, e a comparação vira a prova.",
+      "Mencione os detalhes da aplicação: gotinha, ponteira que facilita, batidinhas com a ponta dos dedos. Detalhe técnico gera confiança de quem já usa produtos parecidos.",
+      "As marquinhas brancas nas rugas mais profundas são normais e reais: explique que some com maquiagem por cima, isso desarma a objeção antes que a pessoa pense nela.",
+      "Feche citando os atributos do produto (lift instantâneo, firmador, efeito antigravidade, até 8 horas, linha pra pele madura) e o link de compra."
+    ]
+  },
+  {
+    id: 26,
+    product: "serum",
+    productLabel: "Sérum redutor",
+    format: "Prova social familiar",
+    title: "Efeito Cinderela",
+    sub: "Aplica no rosto de alguém mais velho da família, com a brincadeira do efeito Cinderela (o sapatinho não pode ir embora à meia-noite) guiando o antes e depois ao vivo.",
+    pinned: true,
+    viralBadge: true,
+    driveId: "1ixyBlbkHY2tmWBkHLMf4y-fujqdKuwGr",
+    script: "(A pele de alguém mais velho da família, de perto)\nA pele da minha [sogra/mãe/vó] tá assim, ó. Toda enrugada de idade.\n\nQuantos anos você tem, [sogra/mãe/vó]? [X anos].\n\nUsava protetor solar nessa pele? Nunca.\n\nEsses olhos mais lindos. Vamos testar isso aqui pra ver se realmente é eficaz, hein?\n\n(Aplica uma gotinha e começa a dar batidinhas)\nUma gotinha assim, né? Aí, vou passar aqui e vamos dar batidinhas. Vamos passar nessa parte aqui dos olhos, porque ela tem uma festa hoje, né, [sogra/mãe/vó]? Vamos ver se vai ficar efeito Cinderela. O sapatinho só não pode ir embora à meia-noite, hein? Vamos ver.\n\n(Espera o produto agir)\nVamos esperar aqui uns minutinhos. Passei esse aqui, ó. Esse é o Sérum Redutor Instantâneo de Linhas da Le Moritz. Vamos ver se realmente é eficaz.\nGente, é um grãozinho de arroz e essa ponteira aqui metalizada. Quanto tempo que a gente tá esperando aqui? Cinco minutos? É, mais ou menos, né? Menos até, acho.\n\n(Revela o resultado)\nOlha isso daqui. Gente, eu tô impressionada. Impressionada.\n\nO que você sentiu quando passou aqui, [sogra/mãe/vó], com a ponteira? Foi ficando geladinho, e depois eu senti que vai repuxando.\n\nGente, impressionada. A gente passou só de um lado.\n\n(Compara com a mesma câmera, mesmo lugar, mesma luz)\nOlha aqui. Como é que tá? Tô com a mesma câmera, o mesmo lugar, a mesma iluminação. Eu não saio daqui.\n\nEntão, ó, isso aqui é efeito lifting, o Sérum Redutor Instantâneo de Linhas da Le Moritz. E ele fica aqui assim na pele, na sua pele esticada, até oito horas. Você passa, espera cinco minutinhos, batidinhas, até oito horas de efeito lifting, efeito Cinderela.\n\nVou deixar aqui, ó, pra você esticar a sua pele e ficar Cinderela também, hein?",
+    tips: [
+      "Troque [sogra/mãe/vó] e [X anos] pela pessoa e idade reais de quem for aplicar: a especificidade reforça a autenticidade.",
+      "A brincadeira do efeito Cinderela (sapatinho, meia-noite) é o fio condutor do vídeo: mantenha o tom leve e brincalhão com a pessoa que está aplicando.",
+      "Pergunte a reação dela ao vivo (o que ela sentiu com a ponteira): a resposta espontânea de quem está sentindo o produto agir é o que mais convence.",
+      "Feche comparando com a mesma câmera, mesmo lugar, mesma luz: reforça que não teve truque nem edição entre o antes e o depois."
+    ]
   }
 ];
 
@@ -561,7 +618,11 @@ function thumbUrl(r) {
 function renderCards() {
   var grid = document.getElementById("grid");
   var list = currentFilter === "all" ? REFS.slice() : REFS.filter(function(r) { return r.product === currentFilter; });
-  list.sort(function(a, b) { return b.id - a.id; });
+  list.sort(function(a, b) {
+    var ap = a.pinned ? 1 : 0, bp = b.pinned ? 1 : 0;
+    if (ap !== bp) return bp - ap;
+    return b.id - a.id;
+  });
   var html = "";
   for (var i = 0; i < list.length; i++) {
     var r = list[i];
@@ -574,6 +635,12 @@ function renderCards() {
     html += "<img class=\"thumb-img\" src=\"" + thumbUrl(r) + "\" alt=\"Ref " + r.id + "\" onerror=\"this.style.display='none'\">";
     html += "</div>";
     html += "<div class=\"thumb-overlay\"><div class=\"play-btn\"><svg width=\"14\" height=\"14\" viewBox=\"0 0 14 14\" fill=\"none\"><path d=\"M3 2l9 5-9 5V2z\" fill=\"#1A1410\"/></svg></div></div>";
+    if (r.viralBadge) {
+      html += "<div class=\"card-badge-viral\">Nossos virais :)</div>";
+    }
+    if (r.pinned) {
+      html += "<div class=\"card-badge-star\" title=\"Fixado\"><svg width=\"16\" height=\"16\" viewBox=\"0 0 24 24\" fill=\"#D6BBFB\"><path d=\"M12 1.5l3.09 6.26 6.91 1-5 4.87 1.18 6.87L12 17.27l-6.18 3.23L7 13.63l-5-4.87 6.91-1L12 1.5z\"/></svg></div>";
+    }
     html += "</div>";
     html += "<div class=\"card-body\">";
     html += "<div class=\"card-tags\"><span class=\"tag " + tagClass + "\">" + r.productLabel + "</span><span class=\"tag tag-format\">" + r.format + "</span></div>";
