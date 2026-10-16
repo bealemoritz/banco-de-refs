@@ -42,6 +42,7 @@ header { padding: 3rem 2rem 1.5rem; max-width: 1100px; margin: 0 auto; }
 .thumb-mascara { background: linear-gradient(160deg, #3d1f2a 0%, #1A1410 100%); }
 .thumb-serum { background: linear-gradient(160deg, #1f2a3d 0%, #111a1a 100%); }
 .thumb-sticks { background: linear-gradient(160deg, #4a2438 0%, #1A1410 100%); }
+.thumb-stickpes { background: linear-gradient(160deg, #4a3520 0%, #1A1410 100%); }
 .thumb-img { width: 100%; height: 100%; object-fit: cover; display: block; }
 .thumb-fallback { width: 100%; height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px; }
 .thumb-num { font-family: "DM Serif Display", serif; font-size: 5rem; line-height: 1; color: rgba(255,255,255,0.08); }
@@ -58,6 +59,7 @@ header { padding: 3rem 2rem 1.5rem; max-width: 1100px; margin: 0 auto; }
 .tag-mascara { background: #FDE8E0; color: #9B3E2A; }
 .tag-serum { background: #DCF0EA; color: #1E6657; }
 .tag-sticks { background: #F5E1E9; color: #9C3F6B; }
+.tag-stickpes { background: #F6EAD6; color: #8A5A12; }
 .tag-format { background: var(--cream); color: var(--muted); }
 .card-title { font-family: "DM Serif Display", serif; font-size: 1.05rem; line-height: 1.25; color: var(--ink); }
 .card-sub { font-size: 0.76rem; color: var(--muted); font-weight: 300; line-height: 1.5; }
@@ -73,6 +75,7 @@ header { padding: 3rem 2rem 1.5rem; max-width: 1100px; margin: 0 auto; }
 .modal-left-mascara { background: linear-gradient(160deg, #3d1f2a 0%, #1A1410 100%); }
 .modal-left-serum { background: linear-gradient(160deg, #1f2a3d 0%, #111a1a 100%); }
 .modal-left-sticks { background: linear-gradient(160deg, #4a2438 0%, #1A1410 100%); }
+.modal-left-stickpes { background: linear-gradient(160deg, #4a3520 0%, #1A1410 100%); }
 .modal-thumb-bg { position: absolute; inset: -20px; background-size: cover; background-position: center; filter: blur(18px) brightness(0.45); transform: scale(1.1); }
 .modal-big-num { font-family: "DM Serif Display", serif; font-size: 7rem; color: rgba(255,255,255,0.12); position: absolute; bottom: 1rem; right: 1.5rem; line-height: 1; z-index: 1; }
 .modal-fmt { font-size: 0.62rem; letter-spacing: 0.15em; text-transform: uppercase; color: rgba(255,255,255,0.5); z-index: 1; }
@@ -98,6 +101,7 @@ header { padding: 3rem 2rem 1.5rem; max-width: 1100px; margin: 0 auto; }
 .dot-mascara { background: #C4705A; }
 .dot-serum { background: #3A7068; }
 .dot-sticks { background: #9C3F6B; }
+.dot-stickpes { background: #B07A2A; }
 .copy-btn { display: inline-flex; align-items: center; gap: 8px; padding: 9px 18px; border-radius: 10px; border: 1px solid var(--border); background: transparent; font-family: "DM Sans", sans-serif; font-size: 0.78rem; color: var(--ink); cursor: pointer; transition: all 0.2s; align-self: flex-start; margin-top: auto; }
 .copy-btn:hover { background: var(--ink); color: white; }
 .copy-btn.done { background: #3A7068; color: white; border-color: #3A7068; }
@@ -125,6 +129,7 @@ header { padding: 3rem 2rem 1.5rem; max-width: 1100px; margin: 0 auto; }
   <button class="filter-btn" id="btn-mascara" onclick="filterRefs('mascara')">Máscara de cílios</button>
   <button class="filter-btn" id="btn-serum" onclick="filterRefs('serum')">Sérum redutor</button>
   <button class="filter-btn" id="btn-sticks" onclick="filterRefs('sticks')">Sticks</button>
+  <button class="filter-btn" id="btn-stickpes" onclick="filterRefs('stickpes')">Stick pés</button>
 </div>
 
 <hr class="divider">
@@ -616,6 +621,39 @@ var REFS = [
       "A parte de rotina (higienizar, tratamentos, sérum, batidinhas, protetor solar por cima) educa quem assiste sobre como usar certo, isso reduz dúvida na hora de comprar.",
       "Reforce: sem agulha, sem procedimento invasivo, efeito dura até 8 horas. Funciona tanto pra quem já tem rugas quanto pra quem só quer prevenir linhas de expressão."
     ]
+  },
+  {
+    id: 29,
+    product: "stickpes",
+    productLabel: "Stick pés",
+    format: "Gancho de identificação",
+    title: "Pé puxando na coberta",
+    sub: "Abre com uma dor que toda pessoa com pé ressecado reconhece na hora (o pé puxando na coberta): a identificação vem antes de qualquer produto aparecer.",
+    driveId: "1F_5Uk9MrRa8ZLntq99gcXZkCiPXARu0A",
+    script: "(Mostra o pé ressecado e passa a mão, ou mostra o pé agarrando no lençol/coberta)\nAmiga, se o seu pé também fica puxando na coberta igual o meu tá, você precisa conhecer esse stick aqui.\n\n(Mostra o Stick Hidratante Reparador para Pés da Le Moritz de perto)\nOlha só isso: tem [X% de ureia], ajuda a prevenir escamação e rachadura. Ele é muito, extremamente hidratante pra aquelas peles bem secas mesmo.\n\n(Passa o stick no calcanhar)\nE o meu pé tem melhorado tanto, mas tanto com esse stick, que até o meu [marido/mãe/irmã] começou a usar, você acredita? Eu já até comprei mais um.\n\n(Mostra o carrinho laranja)\nTá aqui no TikTok Shop, no carrinho laranja. [Se tiver frete grátis ou oferta valendo, fala aqui.] Clica, pega o seu e depois você me agradece.",
+    tips: [
+      "Troque [X% de ureia] pela porcentagem real do stick (confira na embalagem) e não cite nada que o produto não tenha.",
+      "O gancho é a sensação de o pé puxar na coberta: quem tem pé ressecado reconhece na hora. Mostre o gesto (pé agarrando no lençol, mão passando no calcanhar) logo no começo.",
+      "Use só o que for verdade pra você: se alguém te indicou (podóloga, dermatologista) ou se outra pessoa da casa também usa, fale. Depoimento real converte mais.",
+      "Mencione frete grátis ou oferta só se estiver valendo na loja no dia da postagem."
+    ]
+  },
+  {
+    id: 30,
+    product: "stickpes",
+    productLabel: "Stick pés",
+    format: "Depoimento com resultado",
+    title: "Isso tá salvando o meu calcanhar",
+    sub: "Mostra calcanhar e dedão bem ressecados de perto e já traz uma melhora em poucos dias de uso: prova visual da dor somada a um resultado rápido e crível.",
+    driveId: "1OlQ5GF1Ywp5UOnQpvfanbTMQo3io2wPB",
+    script: "(Mostra o calcanhar bem de perto, bem seco)\nAmigas, isso aqui tá salvando o meu calcanhar. Eu tenho o calcanhar, ó, extremamente seco. Não só o calcanhar, como todo o pé, olha só, meu dedão bem ressecado.\n\n(Mostra o Stick Hidratante Reparador para Pés da Le Moritz)\nE esse stickzinho aqui tem [X% de ureia], um ativo muito indicado pra ressecamento extremo dos pés. Eu tô usando faz uns [X dias] e já senti uma melhora absurda.\n\n(Passa o stick no pé)\nÉ super fácil de aplicar, é só passar.\n\n(Mostra o carrinho laranja)\nO link pra comprar eu vou deixar no carrinho laranja aqui. Mas tem que ser rápido e clicar logo, porque eu não sei por quanto tempo ainda vai ter estoque dele.",
+    tips: [
+      "Troque [X% de ureia] pela porcentagem real do stick (confira na embalagem) e [X dias] pelo tempo que você realmente usou.",
+      "Mostre calcanhar e dedão ressecados de perto logo no início: a prova visual do problema vem antes da solução.",
+      "Um prazo curto e real (poucos dias) é mais crível do que uma promessa grande. Conte o que você sentiu de diferença.",
+      "Mostre a aplicação rápida do stick: a facilidade de passar é um diferencial em relação a creme de pote.",
+      "Use a urgência de estoque só se fizer sentido no dia, pra não perder credibilidade."
+    ]
   }
 ];
 
@@ -624,7 +662,8 @@ var currentFilter = "all";
 var PRODUCT_META = {
   mascara: { thumbClass: "thumb-mascara", tagClass: "tag-mascara", dotClass: "dot-mascara", modalClass: "modal-left-mascara" },
   serum: { thumbClass: "thumb-serum", tagClass: "tag-serum", dotClass: "dot-serum", modalClass: "modal-left-serum" },
-  sticks: { thumbClass: "thumb-sticks", tagClass: "tag-sticks", dotClass: "dot-sticks", modalClass: "modal-left-sticks" }
+  sticks: { thumbClass: "thumb-sticks", tagClass: "tag-sticks", dotClass: "dot-sticks", modalClass: "modal-left-sticks" },
+  stickpes: { thumbClass: "thumb-stickpes", tagClass: "tag-stickpes", dotClass: "dot-stickpes", modalClass: "modal-left-stickpes" }
 };
 
 function driveUrl(id) {
@@ -694,6 +733,7 @@ function filterRefs(f) {
   document.getElementById("btn-mascara").className = "filter-btn" + (f === "mascara" ? " active" : "");
   document.getElementById("btn-serum").className = "filter-btn" + (f === "serum" ? " active" : "");
   document.getElementById("btn-sticks").className = "filter-btn" + (f === "sticks" ? " active" : "");
+  document.getElementById("btn-stickpes").className = "filter-btn" + (f === "stickpes" ? " active" : "");
   renderCards();
 }
 
