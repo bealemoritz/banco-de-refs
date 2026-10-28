@@ -721,6 +721,39 @@ var REFS = [
       "Não use frases como regenera, trata, restaura. Use ajudou a reduzir o ressecamento, melhorou a textura, aumentou a hidratação.",
       "Fale só o que você realmente viu nos seus pés: o texto diz décimo dia, então ajuste pro número de dias que você de fato usou."
     ]
+  },
+  {
+    id: 35,
+    product: "stickpes",
+    productLabel: "Stick pés",
+    format: "Ganchos à escolha",
+    title: "Creme em tudo, menos no pé?",
+    sub: "Três ganchos diferentes pra abrir o mesmo vídeo (bronca de amiga, calcanhar em tela cheia ou bancada limpa) e um desenvolvimento padrão que apresenta, mostra a fórmula e a aplicação.",
+    driveId: "1u5sPWjiC1xU5r-tz8cHuzTFECoWsIOvg",
+    hooks: [
+      {
+        label: "Gancho 1 | Bronca de amiga",
+        text: "(Aparece em tela cheia, falando direto pra câmera, em tom exaltado e espontâneo. Depois aponta pros pés e mostra o produto)\nAMIGA, PELO AMOR DE DEUS, tu lembra de passar creme em tudo, menos no teu pé?!"
+      },
+      {
+        label: "Gancho 2 | Olha o estado desse pé",
+        text: "(Foto ou vídeo real do calcanhar ressecado ocupando quase toda a tela. Você aparece pequena no canto, falando e apontando pro pé ao fundo, como no vídeo de referência)\nGente, olha o estado desse calcanhar! E eu aposto que tem muita gente que também esquece de cuidar dos pés.\n\n(Depois de alguns segundos, passa pra tela cheia, mostra o stick e continua a apresentação)"
+      },
+      {
+        label: "Gancho 3 | Cansei de tanta coisa",
+        text: "(Bancada cheia de cremes, lixa e removedor de calosidades. Passa o braço pela bancada, tirando os produtos de cena, e deixa só o stick. Texto na tela: EU COMPLICAVA O CUIDADO COM OS PÉS)\nEu já gastei dinheiro com tanta coisa pra cuidar dos pés... e agora tô usando isso aqui!\n\n(Pega o stick, aproxima da câmera e corta pra aplicação direta no calcanhar)"
+      }
+    ],
+    script: "CENA 1 | APRESENTAÇÃO DO PRODUTO\n(Em tela cheia, mostra o calcanhar e o dedão de perto, se tiver áreas ressecadas. Em seguida, passa o produto)\nEsse aqui é o Stick Hidratante Reparador para Pés da Le Moritz. Ele é superprático pra incluir na rotina de cuidados com essa área que a gente sempre esquece.\n\nCENA 2 | BENEFÍCIOS E INGREDIENTES\n(Mostra a embalagem em close)\nEle tem manteiga de karité, óleo de amêndoas, óleo de coco e vitamina E, e forma uma camada que ajuda a manter a hidratação por até 12 horas.\n\nCENA 3 | APLICAÇÃO\n(Com os pés limpos e secos, desliza o stick direto sobre o calcanhar e as áreas ressecadas. Mostra a aplicação de perto)\nOlha como é fácil aplicar! É só deslizar o stick direto na pele até formar uma película fina, sem precisar espalhar o produto com as mãos. A dica é usar depois do banho, antes de dormir.\n\nCENA 4 | CTA\n(Mostra o produto ao lado dos pés e aponta pro carrinho laranja)\nSe tu também quer deixar a hidratação dos pés mais prática, vou deixar o link dele aqui no carrinho laranja. Dá uma olhadinha!",
+    tips: [
+      "Escolha só um dos três ganchos pra abrir o vídeo, depois siga o desenvolvimento padrão.",
+      "Gancho 1: use uma interpretação espontânea, como se estivesse dando uma bronca divertida numa amiga.",
+      "Gancho 2: deixe o pé ocupar a maior parte da tela e você aparecer pequena no canto, apontando pro calcanhar enquanto fala. Use imagens reais, sem filtros que exagerem o ressecamento.",
+      "Gancho 3: use produtos que você já tem em casa e faça a retirada da bancada num movimento rápido.",
+      "Mostre a aplicação real do produto nos pés limpos e secos.",
+      "Cite só os ingredientes da fórmula: manteiga de karité, óleo de amêndoas, óleo de coco e vitamina E.",
+      "Se mencionar resultado pessoal, conte só experiências verdadeiras, sem inventar prazos nem prometer resultado garantido. Use informação de estoque ou promoção só quando estiver confirmada."
+    ]
   }
 ];
 
@@ -835,6 +868,13 @@ function openModal(id) {
       rightHtml += "<div class=\"script-box\" style=\"white-space:pre-wrap\">" + formatScript(ref.variants[v].script) + "</div>";
     }
     rightHtml += "</div>";
+  } else if (ref.hooks) {
+    rightHtml += "<div><div class=\"section-label\">Ganchos sugeridos - escolha um</div>";
+    for (var h = 0; h < ref.hooks.length; h++) {
+      rightHtml += "<div class=\"option-block\"><div class=\"option-lbl\">" + ref.hooks[h].label + "</div><div class=\"option-txt\" style=\"white-space:pre-wrap\">" + formatScript(ref.hooks[h].text) + "</div></div>";
+    }
+    rightHtml += "</div>";
+    rightHtml += "<div><div class=\"section-label\">Desenvolvimento padrão</div><div class=\"script-box\" style=\"white-space:pre-wrap\">" + formatScript(ref.script) + "</div></div>";
   } else if (ref.isOptions) {
     rightHtml += "<div><div class=\"section-label\">Ganchos sugeridos - escolha um</div>";
     for (var j = 0; j < ref.options.length; j++) {
@@ -892,7 +932,12 @@ function doCopy(id) {
   }
   if (!ref) return;
   var text = "";
-  if (ref.isOptions) {
+  if (ref.hooks) {
+    for (var h = 0; h < ref.hooks.length; h++) {
+      text += ref.hooks[h].label + "\n" + ref.hooks[h].text + "\n\n";
+    }
+    text += "DESENVOLVIMENTO PADRÃO\n" + ref.script;
+  } else if (ref.isOptions) {
     for (var j = 0; j < ref.options.length; j++) {
       text += ref.options[j].label + "\n" + ref.options[j].text + "\n\n";
     }
